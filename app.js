@@ -38,7 +38,7 @@ app.locals.url = "http://vftg.xyz:3000";
 const Authenticate = catchAsync(async (req, res, next) => {
     const {username, access_token} = req.cookies
     if (!username || !access_token) {
-        res.status(401)
+        console.log('cookies not available')
         return res.redirect('/login')
     }
 
@@ -46,23 +46,27 @@ const Authenticate = catchAsync(async (req, res, next) => {
         res.locals.username = username;
         next()
     } else {
-        res.status(401)
         res.redirect('/login')
     }
 })
 
-app.use(Authenticate)
 
-app.get('/', Authenticate, (req, res) => {
+app.get('/', (req, res) => {
     res.redirect(`/feed`)
 })
 
-app.use('/profiles', profilesRoute)
-app.use('/posts', postsRoute)
-app.use('/feed', feedRoute)
+app.use('/profiles', Authenticate, profilesRoute)
+app.use('/posts', Authenticate, postsRoute)
+app.use('/feed', Authenticate, feedRoute)
 
-app.get('/temp', (req, res) => {
+app.get('/temp', Authenticate, (req, res) => {
     res.render('temp')
+})
+
+app.get('/logout', (req, res) => {
+    res.clearCookie('username')
+    res.clearCookie('access_token')
+    res.redirect('/login')
 })
 
 app.get('/login', (req, res) => {

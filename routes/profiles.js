@@ -29,9 +29,11 @@ router.get('/:username', catchAsync(async (req, res) => {
    const followers = (await User.getFollowersCount(username)).count
    const followees = (await User.getFolloweesCount(username)).count
 
+   const isFollowing = await User.isFollowing(res.locals.username, username)
+
    let posts = await Poster.getPosts(username)
 
-    res.render('profiles', { profile, followees, followers, posts})
+    res.render('profiles', { profile, followees, followers, posts, isFollowing})
 }))
 
 router.get('/:username/edit', catchAsync(async (req, res) => {
@@ -42,13 +44,25 @@ router.get('/:username/edit', catchAsync(async (req, res) => {
     res.render('edit', {profile})
 }))
 
+
+router.delete('/follower', catchAsync(async (req ,res) => {
+    const {username} = req.cookies;
+    const {follower_id, followee_id} = req.body;
+    console.log(followee_id)
+    console.log(username)
+    await User.unfollow(followee_id, username)
+    res.redirect(`/profiles/${followee_id}`)
+}))
+
+
 router.post('/follower', catchAsync(async (req, res) => {
     const {username} = req.cookies;
-    const {follower, followee} = req.body;
+    const {follower_id, followee_id} = req.body;
     console.log(req.body)
-    await User.follow(follower, followee)
-    res.redirect(`/profiles/${username}`)
+    await User.follow(username, followee_id)
+    res.redirect(`/profiles/${followee_id}`)
 }))
+
 
 router.put('/:username', catchAsync(async (req, res) => {
     const auth_username = req.cookies.username;

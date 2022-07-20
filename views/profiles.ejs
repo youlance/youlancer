@@ -51,11 +51,11 @@
             <span class="profile__profile-desc" id="bio-header" ><%= profile.bio %> </span
             >
             <% if (username !== profile.username) { %> 
-              <form action="/profiles/follower" method="post">
+              <form action="/profiles/follower<%= isFollowing?"?_method=DELETE":"" %>" method="post">
                 <input type="text" name="follower_id" value="<%= username %>" hidden>
                 <input type="text" name="followee_id" value="<%= profile.username %>" hidden>
                 <button class="btn btn-sm btn-primary btn-block mt-3" type="submit">
-                  Follow
+                  <%= isFollowing? "Unfollow":"Follow" %> 
                 </button>
               </form>
               <% } %> 

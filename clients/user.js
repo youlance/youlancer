@@ -44,13 +44,59 @@ class User {
             throw new ExpressError(JSON.stringify(res.data), res.status)
         }
     }
+
+    async unfollow(follower_id, followee_id) {
+        const req_url = this.#user_url + '/follower';
+
+        let res;
+        try {
+            res = await axios.delete(req_url, {
+                data: {
+                    follower_id,
+                    followee_id
+                }
+            })
+        } catch(e) {
+            res = e.response
+        }
+
+        if (res.status !== 200) {
+            throw new ExpressError(JSON.stringify(res.data), res.status)
+        }
+        return true;
+    }
+
+    async isFollowing(user_1, user_2) {
+        const req_url = this.#user_url + '/followees'
+
+        const follower_id = user_1
+        const page_id = 1;
+        const page_size = 1000000;
+
+        const res = await getHttp( req_url, {follower_id, page_id, page_size})
+        if (res.status !== 200) {
+            throw new ExpressError(JSON.stringify(res.data), res.status)
+        }
+
+        console.log(res.data)
+        return true;
+
+    }
 }
 
 module.exports = new User('http://api.vftg.xyz:8080')
 
-async function getHttp(url) {
+async function getHttp(url, data) {
+    let config = {}
+    if (data) {
+        config.method = "GET"
+        config.data = JSON.stringify(data);
+        config.headers = {
+            "Content-Type": "application/json; charset=UTF-8"
+        }
+    }
     try {
-        const res = await axios.get(url)
+        const res = await axios.get(url, config)
         return res.data;
     } catch(e) {
         console.log(e)
