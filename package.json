@@ -1,0 +1,37 @@
+{
+  "name": "youlancer",
+  "version": "1.0.0",
+  "description": "gateway web-server for youlance project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youlance/youlancer.git"
+  },
+  "keywords": [
+    "ui",
+    "gateway",
+    "teplating",
+    "web",
+    "server",
+    "express",
+    "javascript"
+  ],
+  "author": "Vafa Tarighi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youlance/youlancer/issues"
+  },
+  "homepage": "https://github.com/youlance/youlancer#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.1",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0"
+  }
+}

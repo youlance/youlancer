@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Post</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/general.css" />
+    <link rel="stylesheet" href="/static/css/sprite.css" />
+    <link rel="stylesheet" href="/static/css/navbar.css" />
+    <link rel="stylesheet" href="/static/css/userscontent.css" />
+    <link rel="stylesheet" href="/static/css/comments.css" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
+    <style>
+      #follow-btn:hover {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <%- include('partials/navbar') %> 
+
+    <section class=" container container-top">
+        <section class="content-container">
+        <div class="posts" id="posts">
+            <article class="post-card">
+            <header class="post-header">
+              <div class="post-image-wrapper">
+                <img class="post-image" id="user-image" src="<%= profile.picture %>" />
+              </div>
+              <div class="post-owner-wrapper">
+                <a href="/profiles/<%= profile.username %>" id="username" class="post-owner-name"><%= profile.username %></a>
+              </div>
+              <svg
+                aria-label="More options"
+                class="_8-yf5 "
+                fill="#262626"
+                height="16"
+                viewBox="0 0 48 48"
+                width="16"
+              >
+                <circle
+                  clip-rule="evenodd"
+                  cx="8"
+                  cy="24"
+                  fill-rule="evenodd"
+                  r="4.5"
+                ></circle>
+                <circle
+                  clip-rule="evenodd"
+                  cx="24"
+                  cy="24"
+                  fill-rule="evenodd"
+                  r="4.5"
+                ></circle>
+                <circle
+                  clip-rule="evenodd"
+                  cx="40"
+                  cy="24"
+                  fill-rule="evenodd"
+                  r="4.5"
+                ></circle>
+              </svg>
+            </header>
+
+            <section class="post-content-wrapper">
+              <img class="post-content" id="post-image" src="<%= post.url + post.img_url.substring(1) %>" />
+            </section>
+            <section class="post-comments-wrapper">
+              <div class="post-likes"></div>
+              <div class="post-comment">
+                <span class="post-comment-author" id="caption-username"><%= profile.username %></span>   <span id="caption-text"><%= post.caption %> </span>
+              </div>
+              <br>
+              <div class="post-created" id="post-created"><%= post.created_at %> </div>
+              <div class="comment">
+              </div>
+            </section>
+
+        </article>
+        </div>
+        </section>
+    </section>
+
+    <!--Javascript-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/autosize.min.js"></script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

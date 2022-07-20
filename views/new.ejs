@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Create Post</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/general.css" />
+    <link rel="stylesheet" href="/static/css/sprite.css" />
+    <link rel="stylesheet" href="/static/css/navbar.css" />
+    <link rel="stylesheet" href="/static/css/userscontent.css" />
+    <link rel="stylesheet" href="/static/css/comments.css" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
+    <link rel="stylesheet" href="/static/css/edit.css" />
+  </head>
+  <body>
+
+    <%- include('partials/navbar') %> 
+
+    <!--Section Content-->
+    <section class="container container-top">
+      <div class="edit-wrapper">
+        <!-- <div class="menus-wrapper">
+          <ul class="menus">
+            <li class="menu-item">
+              <a href="/edit.html" class="menu-link active">Edit Profile</a>
+            </li>
+            <li class="menu-item">
+              <a href="/password.html" class="menu-link">Change password</a>
+            </li>
+          </ul>
+        </div> -->
+        <div class="edit-form-wrapper">
+          <div class="edit-profile-section">
+            <div class="edit-width">
+              <img
+                class="edit-profile-picture"
+                id="edit-profile-picture"
+                src="<%= profile.picture %> "
+              />
+            </div>
+            <div>
+              <h1 class="edit-profile-username" id="edit-profile-username"></h1>
+              <span class="edit-profile-btn">Create a new post</span>
+            </div>
+          </div>
+          <form id="edit-form" action="<%= post_url %>/posts" enctype="multipart/form-data">
+            <!-- <div class="edit-section">
+              <div class="edit-width">
+                <label for="name" class="form-label">Name</label>
+              </div>
+              <div>
+                <input class="form-input" type="text" name="name" id="name" value="<%= profile.name %>" />
+              </div>
+            </div> -->
+
+            <div class="edit-section">
+              <div class="edit-width">
+                <label for="username" class="form-label">Username</label>
+              </div>
+              <div>
+                <input class="form-input text-muted" type="text" name="username" id="username" value="<%= profile.username %>" readonly />
+              </div>
+            </div>
+
+            <!-- <div class="edit-section">
+              <div class="edit-width">
+                <label for="email" class="form-label">Email</label>
+              </div>
+              <div>
+                <input
+                  class="form-input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  value="<%= profile.email %>"
+                />
+              </div>
+            </div> -->
+
+            <div class="edit-section">
+              <div class="edit-width">
+                <label for="img_file" class="form-label">Photo</label>
+              </div>
+              <div>
+                <input
+                  class="form-input"
+                  type="file"
+                  name="img_file"
+                  id="img_file"
+                  required
+                />
+              </div>
+            </div>
+            <div class="edit-section">
+              <div class="edit-width">
+                <label for="caption" class="form-label">Caption</label>
+              </div>
+              <div>
+                <textarea
+                  class="form-input"
+                  name="caption"
+                  id="caption"
+                  cols="2"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            
+            <!-- <div class="edit-section">
+              <div class="edit-width">
+                <label for="birthdate" class="form-label">Birth Date</label>
+              </div>
+              <div>
+                <input type="date" name="birthdate" id="birthdate" value="<%= profile.birthdate %>" class="form-input">
+              </div>
+            </div> -->
+
+            <!-- <div class="edit-section">
+              <div class="edit-width">
+                <label for="gender" class="form-label">Gender</label>
+              </div>
+              <div>
+                <select class="form-input" id="gender" name="gender">
+                  <option value="Male" id="option-Male" <%= profile.gender === 'Male'? 'selected':'' %> >Male</option>
+                  <option value="Female" id="option-Female" <%= profile.gender === 'Female'? 'selected':'' %> >Female</option>
+                  <option value="Other" id="option-Other" <%= profile.gender === 'Other'? 'selected':'' %> >Other</option>
+                </select>
+              </div>
+            </div> -->
+            <div class="edit-section">
+              <div class="edit-width"></div>
+              <div>
+                <button class="form-btn" type="submit">Upload</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Javascript-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/autosize.min.js"></script>
+
+    <script src="/static/js/new.js"></script>
+  </body>
+</html>

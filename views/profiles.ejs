@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/general.css" />
+    <link rel="stylesheet" href="/static/css/sprite.css" />
+    <link rel="stylesheet" href="/static/css/navbar.css" />
+    <link rel="stylesheet" href="/static/css/userscontent.css" />
+    <link rel="stylesheet" href="/static/css/comments.css" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
+    <style>
+      #follow-btn:hover {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <%- include('partials/navbar') %> 
+
+    <!--Section Content-->
+    <section class="container container-top">
+      <header class="profile-wrapper">
+        <div class="profile__profile-image-wrapper">
+          <img class="profile__profile-image" id="profile__profile-image" src="<%= profile.picture %>" />
+        </div>
+
+        <div class="profile__profile-details-wrapper">
+          <div class="profile__profile-details">
+            <h1 class="profile__profile-username" id="username-top-header"><%= profile.username %> </h1>
+            <a href="/profiles/<%= profile.username %>/edit" class="profile__profile-edit" <%= (username !== profile.username)? "hidden":"" %> >Edit Profile</a>
+            <!-- <span class="instaIcons spriteSettings"></span> -->
+          </div>
+          <div class="profile__profile-follower-wrapper">
+            <span class="profile__profile-follow"
+              ><span class="profile-count" id="post-count-header"><%= posts.length %> </span> posts</span
+            >
+            <a class="profile__profile-follow" href="#"
+              ><span class="profile-count" id="follower-header"><%= followers %> </span> followers</a
+            >
+            <a class="profile__profile-follow" href="#"
+              ><span class="profile-count" id="followee-header"><%= followees %> </span> following</a
+            >
+          </div>
+          <div class="profile__profile-desc-wrapper">
+            <h1 class="profile__profile-name" id="name-header"><%= profile.name %></h1>
+            <span class="profile__profile-desc" id="bio-header" ><%= profile.bio %> </span
+            >
+            <% if (username !== profile.username) { %> 
+              <form action="/profiles/follower" method="post">
+                <input type="text" name="follower_id" value="<%= username %>" hidden>
+                <input type="text" name="followee_id" value="<%= profile.username %>" hidden>
+                <button class="btn btn-sm btn-primary btn-block mt-3" type="submit">
+                  Follow
+                </button>
+              </form>
+              <% } %> 
+          </div>
+        </div>
+      </header>
+    </section>
+    <section class="container container-bottom" style="margin-top: 50px;">
+
+      <!-- <div style="height: 100px; border-bottom: 1px solid rgb(207, 207, 207);"></div> -->
+      <hr>
+      <main class="container">
+        <div class="container" id="posts">
+          <div class="row align-items-center border">
+          <% for (let post of posts) { %>
+
+           <a href="/posts/<%= post.id %>" class="col-4 d-flex justify-content-center border">
+            <img class="img-fluid"
+                src="<%= posts.url + post.img_url.substring(1) %> ">
+            </a>
+
+          <% } %> 
+          </div>
+        </div>
+      </main>
+
+    </section>
+
+    <!--Javascript-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/autosize.min.js"></script>
+
+    <script src="/static/js/follow.js"></script>
+  </body>
+</html>
