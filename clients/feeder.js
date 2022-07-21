@@ -11,9 +11,10 @@ class Feeder {
 
     async getLatestPosts(username, page) {
         try {
+            console.log()
             const res = await axios.post(this.#feeder_url, {username, page})
             const posts = res.data.posts;
-            posts.url = Poster.poster_url
+            posts.url = Poster.poster_url;
             return res.data.posts
         } catch (e) {
             const res = e.response;

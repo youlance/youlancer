@@ -18,7 +18,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="d-flex flex-column vh-100">
 
     <%- include('partials/navbar') %> 
 
@@ -26,7 +26,7 @@
     <section class="container container-top">
       <header class="profile-wrapper">
         <div class="profile__profile-image-wrapper">
-          <img class="profile__profile-image" id="profile__profile-image" src="<%= profile.picture %>" />
+          <img class="profile__profile-image border" id="profile__profile-image" src="<%= profile.picture %>" />
         </div>
 
         <div class="profile__profile-details-wrapper">
@@ -63,11 +63,10 @@
         </div>
       </header>
     </section>
-    <section class="container container-bottom" style="margin-top: 50px;">
+    <section class="container container-bottom" style="margin-top: 100px;">
 
       <!-- <div style="height: 100px; border-bottom: 1px solid rgb(207, 207, 207);"></div> -->
-      <hr>
-      <main class="container">
+      <main class="container mt-5">
         <div class="container" id="posts">
           <div class="row align-items-center border">
           <% for (let post of posts) { %>
@@ -83,6 +82,7 @@
       </main>
 
     </section>
+    <%- include('partials/footer') %> 
 
     <!--Javascript-->
     <script src="/static/js/jquery.min.js"></script>
@@ -90,6 +90,5 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/autosize.min.js"></script>
 
-    <script src="/static/js/follow.js"></script>
   </body>
 </html>

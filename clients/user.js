@@ -52,13 +52,14 @@ class User {
         try {
             res = await axios.delete(req_url, {
                 data: {
-                    follower_id,
-                    followee_id
+                    followee_id,
+                    follower_id
                 }
             })
         } catch(e) {
             res = e.response
         }
+
 
         if (res.status !== 200) {
             throw new ExpressError(JSON.stringify(res.data), res.status)
@@ -73,13 +74,18 @@ class User {
         const page_id = 1;
         const page_size = 1000000;
 
-        const res = await getHttp( req_url, {follower_id, page_id, page_size})
+        console.log(follower_id, page_id, page_size)
+        const res = await postHttp( req_url, {follower_id, page_id, page_size})
         if (res.status !== 200) {
             throw new ExpressError(JSON.stringify(res.data), res.status)
         }
 
         console.log(res.data)
-        return true;
+        if (res.data.find(obj => obj.followee_id === user_2)) {
+            return true;
+        } else {
+            false
+        }
 
     }
 }
@@ -87,16 +93,8 @@ class User {
 module.exports = new User('http://api.vftg.xyz:8080')
 
 async function getHttp(url, data) {
-    let config = {}
-    if (data) {
-        config.method = "GET"
-        config.data = JSON.stringify(data);
-        config.headers = {
-            "Content-Type": "application/json; charset=UTF-8"
-        }
-    }
     try {
-        const res = await axios.get(url, config)
+        const res = await axios.get(url)
         return res.data;
     } catch(e) {
         console.log(e)

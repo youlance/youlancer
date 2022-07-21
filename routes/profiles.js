@@ -50,7 +50,7 @@ router.delete('/follower', catchAsync(async (req ,res) => {
     const {follower_id, followee_id} = req.body;
     console.log(followee_id)
     console.log(username)
-    await User.unfollow(followee_id, username)
+    await User.unfollow(username, followee_id)
     res.redirect(`/profiles/${followee_id}`)
 }))
 
@@ -76,6 +76,17 @@ router.put('/:username', catchAsync(async (req, res) => {
     Profiler.updateProfile(username, req.body)
     res.redirect(`/profiles/${username}`)
 }))
+
+router.get('/', (req, res) => {
+    const {username} = req.query;
+    
+    if (!username) {
+        return res.redirect(`/profiles/${req.cookies.username}`)
+    }
+
+    res.redirect(`/profiles/${username}`)
+    
+})
 
 
 module.exports = router;

@@ -12,9 +12,10 @@ router.get('/', catchAsync(async (req, res) => {
     const { username = req.cookies.username, page = 1 } = req.body
 
     const posts = await Feeder.getLatestPosts(username, page);
-    console.log(posts)
     const profilesMap = await collectProfiles(posts)
 
+
+    
     res.render('feed', {posts, profilesMap})
 }))
 

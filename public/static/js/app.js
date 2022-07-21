@@ -41,22 +41,16 @@ const periods = {
 
 const formatTime = timeCreated => {
   const diff = now_utc() - timeCreated
-  console.log(diff)
 
   if (diff > periods.month) {
-    console.log('1')
     return `${Math.floor(diff / periods.month)}m ago`;
   } else if (diff > periods.week) {
-    console.log('2')
     return `${Math.floor(diff / periods.week)}w ago`;
   } else if (diff > periods.day) {
-    console.log('3')
     return `${Math.floor(diff / periods.day)}d ago`;
   } else if (diff > periods.hour) {
-    console.log('4')
     return `${Math.floor(diff / periods.hour)}h ago`;
   } else if (diff > periods.minute) {
-    console.log('5')
     return `${Math.floor(diff / periods.minute)}m ago`;
   }
   return 'Just now';
@@ -72,9 +66,7 @@ for (const post_created of post_createds) {
     // created utc
     const t_date = new Date(time_stamp)
 
-    console.log('FORMATTING...')
     const ff = formatTime(t_date)
-    console.log(ff)
     post_created.innerText = formatTime(t_date)
   }
 

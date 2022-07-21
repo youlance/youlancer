@@ -23,6 +23,28 @@ class Poster {
         }
     }
 
+    async delete(post_id) {
+        const req_url = this.poster_url + '/posts'
+
+
+        let res;
+        try {
+            res = await axios.delete(req_url, {
+                data: {
+                    id: post_id
+                }
+            })
+        } catch(e) {
+            res = e.response
+        }
+
+
+        if (res.status !== 200) {
+            throw new ExpressError(JSON.stringify(res.data), res.status)
+        }
+        return true;
+    }
+
     async getPosts(username) {
         const req_url = this.poster_url + '/posts/' + username
 
