@@ -35,7 +35,7 @@ class Auther {
     }
 }
 
-module.exports = new Auther('http://api.vftg.xyz:8081')
+module.exports = new Auther(process.env.NODE_CLIENT_AUTH)
 
 async function postHttp(url, data) {
     try {

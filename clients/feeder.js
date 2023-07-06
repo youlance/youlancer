@@ -26,4 +26,4 @@ class Feeder {
     
 }
 
-module.exports = new Feeder('http://api.vftg.xyz:5555/feed')
+module.exports = new Feeder(process.env.NODE_CLIENT_FEED)

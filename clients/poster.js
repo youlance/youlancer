@@ -63,7 +63,7 @@ class Poster {
     }
 }
 
-module.exports = new Poster('http://api.vftg.xyz:6969')
+module.exports = new Poster(process.env.NODE_CLIENT_POST)
 
 async function getHttp(url) {
     try {

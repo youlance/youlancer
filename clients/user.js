@@ -90,7 +90,7 @@ class User {
     }
 }
 
-module.exports = new User('http://api.vftg.xyz:8080')
+module.exports = new User(process.env.NODE_CLIENT_USER)
 
 async function getHttp(url, data) {
     try {

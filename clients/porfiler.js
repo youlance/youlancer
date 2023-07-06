@@ -58,4 +58,4 @@ class Profiler {
 
 }
 
-module.exports = new Profiler('http://api.vftg.xyz:8084');
+module.exports = new Profiler(process.env.NODE_CLIENT_PROFILE);

@@ -32,7 +32,7 @@ app.use(methodOverride('_method'))
 app.use(cookieParser())
 app.use(express.static('public'))
 
-app.locals.url = "http://vftg.xyz:3000";
+app.locals.url = process.env.NODE_URL;
 
 // Auth Middleware
 const Authenticate = catchAsync(async (req, res, next) => {
@@ -98,6 +98,6 @@ app.post('/register', catchAsync(async (req, res) => {
 }))
 
 
-app.listen(3000, () => {
-    console.log('SERVING ON PORT 3000')
+app.listen(process.env.NODE_PORT, () => {
+    console.log(`SERVING ON PORT ${process.env.NODE_PORT}`)
 })
